@@ -1,9 +1,19 @@
 .list-items {
     display: flex;
     list-style: none;
-    border: 1px solid salmon;
+    border: 1px solid #2196f3;
 }
 
 .list-items > li {
     padding: 5px;
+}
+
+.list-items {
+    max-width: 344px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.message {
+    margin-bottom: 20px;
 }

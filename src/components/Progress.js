@@ -5,18 +5,18 @@ import './Progress.css';
 const Progress = ({ attempt, listItems }) => {
     if (attempt > 0) {
         return(
-            <div>
+            <div style={{ marginBottom: "10px"}}>
                 <Typography style={{ marginTop: "20px"}} className="progress-bar" variant="h6">Guess # { attempt }</Typography>
-                <ul className="list-items">
+                <div className="list-items">
                     { listItems }
-                </ul>
+                </div>
             </div>
         )
     }
 
     return(
         <div>
-            <Typography style={{ marginTop: "20px"}} className="progress-bar" variant="h6">Tin tin</Typography>
+            <Typography style={{ marginTop: "20px"}} className="progress-bar" variant="h6" />
         </div>
     )
 }

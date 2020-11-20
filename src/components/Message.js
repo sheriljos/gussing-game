@@ -1,13 +1,18 @@
 import React from 'react';
-import { Alert } from '@material-ui/lab/Alert';
-// import MuiAlert from '@material-ui/lab/Alert';
+import MuiAlert from '@material-ui/lab/Alert';
 
-const Message = ({ message }) => {
+const Message = ({message}) => {
+    const { color, value } = message;
+
+    function Alert(props) {
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
+    }
+
     return(
-        <div>
-            <Alert severity="error">{ message }</Alert>
+        <div className="message">
+            <Alert severity={ color }>{ value }</Alert>
         </div>
-    );
+    )
 }
 
 export default Message;

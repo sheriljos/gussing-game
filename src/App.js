@@ -3,6 +3,7 @@ import { Typography, Paper, Divider, Grid } from '@material-ui/core';
 import Form from './components/Form';
 import Progress from './components/Progress.js'
 import Message from './components/Message.js'
+import './App.css';
 
 class App extends React.Component{
   constructor(props) {
@@ -12,32 +13,40 @@ class App extends React.Component{
       guess: undefined,
       allGuesses: [],
       attempt: 0,
-      message: 'Start playing'
+      message: { value: 'Start the game', color: 'info' }
     };
   }
 
   updateAppState(guess) {
+    if (guess > 100) {
+      this.setState({
+        message: { value: 'Shant be greater than 100', color: 'error'}
+      })
+
+      return;
+    }
+
     this.setState(prevState => ({
       guess,
       attempt: prevState.attempt + 1,
       allGuesses: [...prevState.allGuesses, { guess }],
-      message: this.getMessage(guess)
+      message: this.getMessage(guess),
     }));
   }
 
   getMessage(guess) {
     const absoluteDifference = Math.abs(this.state.initial - guess)
 
-    if (absoluteDifference == 0) {
-      return 'Yay you won';
-    } else if (absoluteDifference <= 5) {
-      return 'Very hot';
-    } else if (absoluteDifference > 5 && absoluteDifference <= 10) {
-      return 'Hot hot';
+    console.log(absoluteDifference)
+
+    if (absoluteDifference === 0) {
+      return { value: 'You won', color: 'success' };
+    } else if (absoluteDifference <= 10) {
+      return { value: 'Hot hot', color: 'info' };
     } else if (absoluteDifference > 10 && absoluteDifference <= 25) {
-      return 'warm';
+      return { value: 'Warm', color: 'warning' };
     } else {
-      return 'cold';
+      return { value: 'Cold', color: 'error' };
     }
   }
 
@@ -45,9 +54,9 @@ class App extends React.Component{
     const { allGuesses, attempt, message } = this.state;
     
     const listItems = allGuesses.map((item, index) => 
-      <li key={index}>
+      <span key={index}>
         <span>{ item.guess }</span>
-      </li>
+      </span>
     );
 
     return(
@@ -56,7 +65,7 @@ class App extends React.Component{
           <Paper style={{ padding: "20px" }} elevation={6}>
             <Typography variant="h4" align="center" gutterBottom>HOT OR COLD</Typography>
             <Divider style={{ margin: "20px 0"}}/>
-            <div>{ message }</div>
+            <Message message={ message }/>
             <Form returnGuessToApp={ guess => this.updateAppState(guess)}/>
             <Progress attempt={ attempt } listItems={ listItems }/>
           </Paper>
