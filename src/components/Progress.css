@@ -1,0 +1,9 @@
+.list-items {
+    display: flex;
+    list-style: none;
+    border: 1px solid salmon;
+}
+
+.list-items > li {
+    padding: 5px;
+}
