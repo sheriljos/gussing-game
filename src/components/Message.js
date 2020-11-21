@@ -1,8 +1,7 @@
 import React from 'react';
 import MuiAlert from '@material-ui/lab/Alert';
 
-const Message = ({message}) => {
-    const { color, value } = message;
+const Message = ({message : { color, value }}) => {
 
     function Alert(props) {
         return <MuiAlert elevation={6} variant="filled" {...props} />;

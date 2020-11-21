@@ -37,7 +37,6 @@ class App extends React.Component{
   getMessage(guess) {
     const absoluteDifference = Math.abs(this.state.initial - guess)
 
-
     if (absoluteDifference === 0) {
       return { value: 'You won', color: 'success' };
     } else if (absoluteDifference <= 10) {
